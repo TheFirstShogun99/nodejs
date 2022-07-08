@@ -1,45 +1,38 @@
-pipeline { 
-    environment { 
-        registry = "sonpham170199/nodejs" 
-        registryCredential = 'dockerhub_id' 
-        dockerImage = 'nodejs' 
+pipeline {   
+  agent{      
+    node { label 'slave'}     
+  }  
+  environment {     
+    DOCKERHUB_CREDENTIALS= credentials('b3e3cdad-bb85-47d7-95d8-0553dcda63b2')     
+  }    
+  stages {         
+    stage("Git Checkout"){           
+      steps{                
+	git credentialsId: 'github', url: 'https://github.com/TheFirstShogun99/nodejs.git'                 
+	echo 'Git Checkout Completed'            
+      }        
     }
-    agent slave 
-    stages { 
-        stage('Install Packages') { 
-            steps { 
-                sh 'yum update -y'
-                sh 'curl -fsSL https://get.docker.com/ | sh'
-                sh 'sudo systemctl start docker'
-                sh 'sudo systemctl status docker'
-            }
-        }
-    stages { 
-        stage('Cloning our Git') { 
-            steps { 
-                git 'https://github.com/TheFirstShogun99/nodejs.git' 
-            }
-        }
-        stage('Building our image') { 
-            steps { 
-                script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                }
-            } 
-        }
-        stage('Deploy our image') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
-            }
-        } 
-        stage('Cleaning up') { 
-            steps { 
-                sh "docker rmi $registry:$BUILD_NUMBER" 
-            }
-        } 
+    stage('Build Docker Image') {         
+      steps{                
+	sh 'sudo docker build -t sonpham170199/nodejs:$BUILD_NUMBER .'           
+        echo 'Build Image Completed'                
+      }           
     }
-}
+    stage('Login to Docker Hub') {         
+      steps{                            
+	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 
+	echo 'Login Completed'                
+      }           
+    }               
+    stage('Push Image to Docker Hub') {         
+      steps{                            
+	sh 'sudo docker push dockerhubusername/dockerhubreponame:$BUILD_NUMBER'                 echo 'Push Image Completed'       
+      }           
+    }      
+  } //stages 
+  post{
+    always {  
+      sh 'docker logout'           
+    }      
+  }  
+} //pipeline
