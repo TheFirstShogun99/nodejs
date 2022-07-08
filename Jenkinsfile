@@ -23,4 +23,5 @@ pipeline {
 	echo 'Git Checkout Completed'            
       }        
     }
+  }
 } //pipeline
