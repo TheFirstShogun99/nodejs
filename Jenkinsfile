@@ -6,7 +6,7 @@ pipeline {
     DOCKERHUB_CREDENTIALS= credentials('b3e3cdad-bb85-47d7-95d8-0553dcda63b2')     
   }
   stages {
-    stage('Install Packages') {
+    step('Install Packages') {
         sh 'yum check-update -y'
 		sh 'curl -fsSL https://get.docker.com/ | sh'
 		sh 'sudo systemctl start docker'
