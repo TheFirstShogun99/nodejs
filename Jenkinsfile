@@ -12,12 +12,5 @@ pipeline {
                 url: 'https://github.com/TheFirstShogun99/nodejs.git'
       }
     }
-    stage('Building image') {
-      steps{
-        steps {
-          sh 'buildah bud --format docker -f Dockerfile-nodejs -t docker.io/$dockerImage:$BUILD_NUMBER .'
-        }
-      }
-    }
   }
 }
