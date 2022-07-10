@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Building Image') {
       steps {
-            sh "podman build -f Dockerfile-nodejs -t docker.io/$dockerImage:$BUILD_NUMBER ."
+            sh "podman build -t docker.io/$dockerImage:$BUILD_NUMBER ."
       }
     }
   }
