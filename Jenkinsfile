@@ -8,6 +8,7 @@ pipeline {
   stages {
     stage('Building Image') {
       steps {
+            sh "mount --make-rshared /"
             sh "podman build -t docker.io/$dockerImage:$BUILD_NUMBER ."
       }
     }
