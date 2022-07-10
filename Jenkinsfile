@@ -2,7 +2,7 @@ pipeline {
   environment {
     registry = "sonpham170199/nodejs"
     registryCredential = 'dockerhub_id'
-    dockerImage = ''
+    dockerImage = "sonpham170199/nodejs"
   }
   agent any
   stages {
@@ -15,20 +15,8 @@ pipeline {
     stage('Building image') {
       steps{
         steps {
-          sh 'buildah bud -t docker.io/$registry:$BUILD_NUMBER .'
+          sh 'buildah bud --format docker -f Dockerfile-nodejs -t docker.io/$dockerImage:$BUILD_NUMBER .'
         }
-      }
-    }
-    stage('Push image') {
-      steps{
-        steps {
-          sh 'buildah login -u sonpham170199 -p Ilab.vn171 docker.io'
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "buildah rmi $registry:$BUILD_NUMBER"
       }
     }
   }

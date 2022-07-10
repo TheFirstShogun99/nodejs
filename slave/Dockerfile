@@ -18,6 +18,8 @@ RUN apt-get update && \
     apt-get install -qy maven && \
 # Install buildah
 	apt-get install -qy buildah && \
+# Install Podman
+    apt-get install -qy podman && \
 # Install Ansible
 	apt-get install -qy python3-pip && \
 	python3 -m pip -V && \
