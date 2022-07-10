@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Building Image') {
       steps {
-            sh "buildah bud --format docker -f Dockerfile-nodejs -t docker.io/$dockerImage:$BUILD_NUMBER ."
+            sh "podman build -f Dockerfile-nodejs -t docker.io/$dockerImage:$BUILD_NUMBER ."
       }
     }
   }
