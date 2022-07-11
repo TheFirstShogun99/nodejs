@@ -9,5 +9,6 @@
         - nano
         - wget
         - vim
+        - chronyd
         state: present
         update_cache: True
