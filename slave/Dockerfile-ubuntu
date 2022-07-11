@@ -29,11 +29,19 @@ RUN mkdir -p /etc/apt/keyrings && \
 
 RUN pip3 install --upgrade pip && \
     pip3 install cffi && \
-    pip3 install ansible
+    pip3 install ansible==2.10.4 && \
+    pip3 install boto3==1.17.68 && \
+    pip3 install boto && \
+    pip3 install certifi==2021.10.8
     
 # Install AWS CLI 
-RUN pip3 install awscliv2
-    
+RUN ansible-galaxy collection install amazon.aws:==2.3.0 && \
+    ansible-galaxy collection install community.aws:==2.5.0 && \
+    ansible-galaxy collection install ansible.utils:==2.6.1
+
+# Install Helm
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
 # Install a basic SSH server
 RUN apt-get install -qy openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
