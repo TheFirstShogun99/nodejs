@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Ansible Ping') {
       steps {
-            sh "cd ./ansible/first-playbook && echo Ilab.vn171 | ansible centos -i inventory -u admin02 --ask-pass -m ping"
+            sh "cd ./ansible/first-playbook && ansible -i inventory centos -m ping"
       }
     }
   }
