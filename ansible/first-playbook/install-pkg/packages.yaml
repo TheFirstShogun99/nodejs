@@ -4,8 +4,10 @@
   tasks:
     - name: Install httpd package
       yum:
+        name: 
+        - httpd
+        - nano
+        - wget
+        - vim
         state: present
         update_cache: True
-        with_items:
-        - nano
-        - vim
