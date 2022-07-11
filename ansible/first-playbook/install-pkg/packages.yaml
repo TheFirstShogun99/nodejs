@@ -1,4 +1,4 @@
-- hosts: centos
+- hosts: all
   user: admin02
   become: True
   tasks:
