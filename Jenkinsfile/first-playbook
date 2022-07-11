@@ -6,12 +6,12 @@ pipeline {
   stages {
     stage('Ansible Ping') {
       steps {
-            sh "cd .. && cd ./ansible/first-playbook && ansible centos -m ping"
+            sh "cd ansible/first-playbook && ansible centos -m ping"
       }
     }
     stage('Ansible Install Packages') {
       steps {
-            sh "cd .. && cd ./ansible/first-playbook && ansible-playbook install-pkg/packages.yaml"
+            sh "cd ansible/first-playbook && ansible-playbook install-pkg/packages.yaml"
       }
     }
   }
