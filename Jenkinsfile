@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Building Image') {
       steps {
-            sh "docker build -t $dockerImage -f Dockerfile ."
+            sh "docker build -t $dockerImage:$BUILD_NUMBER -f Dockerfile ."
       }
     }
     stage('Login to Registry') {
