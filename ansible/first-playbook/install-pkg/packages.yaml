@@ -2,7 +2,7 @@
   user: admin02
   become: True
   tasks:
-    - name: Install httpd package
+    - name: Install Packages
       yum:
         name: 
         - httpd
