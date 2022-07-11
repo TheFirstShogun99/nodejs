@@ -1,5 +1,6 @@
 pipeline {
   environment {
+  registry = "sonpham170199/nodejs"
   }
   agent any
   stages {
