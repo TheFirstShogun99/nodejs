@@ -10,10 +10,5 @@ pipeline {
             && ansible-playbook install-pkg/packages.yaml"
       }
     }
-    stage('Ansible Install Packages') {
-      steps {
-            sh "ansible-playbook ansible/first-playbook/install-pkg/packages.yaml"
-      }
-    }
   }
 }
