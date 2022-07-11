@@ -16,7 +16,10 @@ RUN apt-get update && \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release
+    lsb-release \
+    epel-release \
+    makecache \
+    sshpass
 
 # Add Docker's official GPG key
 RUN mkdir -p /etc/apt/keyrings && \
