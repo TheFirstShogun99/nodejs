@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Building Image') {
       steps {
-            sh "podman info"
+            sh "docker --version"
       }
     }
   }

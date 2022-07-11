@@ -2,26 +2,20 @@ FROM ubuntu:jammy
 
 LABEL maintainer="Son Pham Hoang Thanh <sonpham170199@outlook.com>"
 
-# Make sure the package repository is up to date.
-RUN apt-get update && \
-    apt-get -qy full-upgrade && \
-    apt-get install -qy git && \
+# Static Applications.
+RUN yum install -qy git && \
 # Install a basic SSH server
-    apt-get install -qy openssh-server && \
+    yum install -qy openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
 # Install JDK 8 (latest stable edition at 2019-04-01)
-    apt-get install -qy openjdk-8-jdk && \
+    yum install -qy openjdk-8-jdk && \
 # Install curl
-    apt-get install -qy curl && \
+    yum install -qy curl && \
 # Install maven
-    apt-get install -qy maven && \
-# Install buildah
-	apt-get install -qy buildah && \
-# Install Podman
-    apt-get install -qy podman && \
+    yum install -qy maven && \
 # Install Ansible
-	apt-get install -qy python3-pip && \
+	yum install -qy python3-pip && \
 	python3 -m pip -V && \
 	curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
 	python3 get-pip.py --user && \
@@ -29,12 +23,14 @@ RUN apt-get update && \
 	python3 -m pip install --user ansible-core==2.12.3 && \
 	python3 -m pip install --upgrade --user ansible && \
 # Cleanup old packages
-    apt-get -qy autoremove && \
+    yum -qy autoremove && \
 # Add user jenkins to the image
     useradd -m jenkins -p 200699 && \
 # Creat M2 directory
     cd /home/jenkins && \
     mkdir .m2
+# Additional Application
+# RUN 
 
 #ADD settings.xml /home/jenkins/.m2/
 # Copy authorized keys
