@@ -17,7 +17,6 @@ RUN apt-get update && \
     curl \
     gnupg \
     lsb-release \
-    epel-release \
     sshpass
 
 # Add Docker's official GPG key
