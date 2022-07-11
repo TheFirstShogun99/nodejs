@@ -3,8 +3,8 @@ pipeline {
     registry = "sonpham170199/nodejs"
     registryCredential = 'dockerhub_id'
     dockerImage = "sonpham170199/nodejs"
-    docker_username = sonpham170199
-    docker_password = Ilab.vn171
+    docker_username = 'sonpham170199'
+    docker_password = 'Ilab.vn171'
   }
   agent any
   stages {
