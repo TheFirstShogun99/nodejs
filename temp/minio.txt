@@ -1,0 +1,7 @@
+##
+resourceGroups: k8s-test
+
+RBAC Role Info
+Application ID: 987d7c02-a112-4ef6-bb51-0c4b5394cc50
+Subscription: 52423631-61aa-4100-8dee-78b74c4d639d
+
